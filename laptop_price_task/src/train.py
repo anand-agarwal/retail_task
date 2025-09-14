@@ -6,4 +6,4 @@ if __name__ == "__main__":
     l = LaptopModel()
     l.preprocess()
     t = TrainModels(l, "Price")
-    t.train_and_save(l.folder_name, "model3")
+    t.train_and_save(l.folder_name, "final_model")
