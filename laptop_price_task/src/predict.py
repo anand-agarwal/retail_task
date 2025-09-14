@@ -6,8 +6,8 @@ CLI for evaluating saved models using existing functions from bases.base.
 
 Usage:
     python src/predict.py \
-      --model_path models/final_model/ridge_model.pkl \
-      --data_path data/Laptop Price(1).csv \
+      --model_path models/final_model/lasso_model.pkl \
+      --data_path "data/Laptop Price(1).csv" \
       --metrics_output_path results/evaluation_metrics.txt \
       --predictions_output_path results/evaluation_predictions.csv
 """
@@ -33,14 +33,9 @@ def mae(y_true, y_pred):
 def load_model(model_path):
     """Load a saved model from pickle file"""
     import pickle
-    try:
-        with open(model_path, "rb") as f:
-            model = pickle.load(f)
-        return model
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Model file not found: {model_path}")
-    except Exception as e:
-        raise Exception(f"Error loading model: {str(e)}")
+    with open(model_path, "rb") as f:
+        model = pickle.load(f)
+    return model
 
 
 def save_metrics(metrics, output_path):
@@ -110,7 +105,9 @@ Examples:
     try:
         model = load_model(args.model_path)
         
-        laptop_model = LaptopModel()
+        # Create LaptopModel instance without calling parent __init__
+        laptop_model = LaptopModel.__new__(LaptopModel)
+        laptop_model.scores = {}
         laptop_model.df = pd.read_csv(args.data_path)
         laptop_model.preprocess()
         X, y = laptop_model.extract_x_y("Price")
@@ -129,11 +126,10 @@ Examples:
         save_predictions(y, y_pred, args.predictions_output_path)
         print(f"✅ Evaluation completed successfully!")
         
-    except FileNotFoundError:
-        print("❌ Model not found", file=sys.stderr)
-        sys.exit(1)
     except Exception as e:
-        print(f"❌ Error: {str(e)}", file=sys.stderr)
+        print(f"Error: {str(e)}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 

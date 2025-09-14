@@ -33,14 +33,9 @@ def mae(y_true, y_pred):
 def load_model(model_path):
     """Load a saved model from pickle file"""
     import pickle
-    try:
-        with open(model_path, "rb") as f:
-            model = pickle.load(f)
-        return model
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Model file not found: {model_path}")
-    except Exception as e:
-        raise Exception(f"Error loading model: {str(e)}")
+    with open(model_path, "rb") as f:
+        model = pickle.load(f)
+    return model
 
 
 def save_metrics(metrics, output_path):
