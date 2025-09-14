@@ -20,7 +20,7 @@ import os
 from pathlib import Path
 
 # Import existing functions from train_model.py
-from train_model import load_model, mse, rmse, r2_score
+from train_model import load_model, mse, rmse, r2_score, RegressionModel
 from data_preprocessing import load_data
 
 
@@ -74,15 +74,6 @@ Examples:
     --data_path data/Life Expectancy.csv \\
     --metrics_output_path results/evaluation_metrics.txt \\
     --predictions_output_path results/evaluation_predictions.csv
-
-  # Evaluate with custom features and target
-  python src/predict.py \\
-    --model_path models/model1/lasso_model1.pkl \\
-    --data_path data/Life Expectancy.csv \\
-    --features "Health_Index,Economic_Index,Disease_Index" \\
-    --target "Life expectancy " \\
-    --metrics_output_path results/custom_metrics.txt \\
-    --predictions_output_path results/custom_predictions.csv
         """
     )
     
@@ -97,29 +88,23 @@ Examples:
                        help='Path where predictions will be saved')
     
     # Optional arguments
-    parser.add_argument('--features', type=str,
-                       help='Comma-separated list of feature column names (if not provided, will be inferred)')
-    parser.add_argument('--target', type=str,
-                       help='Target column name (if not provided, will be inferred)')
     parser.add_argument('--verbose', action='store_true',
                        help='Print detailed information during execution')
     
     args = parser.parse_args()
     
     try:
-        # Parse features if provided
-        features = None
-        if args.features:
-            features = [f.strip() for f in args.features.split(',')]
-        
         # Load model
         if args.verbose:
             print(f"Loading model from: {args.model_path}")
         model = load_model(args.model_path)
         
-        # Load data - use the same features as the model was trained with
-        if features is None:
-            # Use the standard features from train_model.py
+        # Get the features that the model was trained on
+        if hasattr(model, 'feature_names') and model.feature_names is not None:
+            features = model.feature_names
+            target = "Life expectancy "  # Standard target for life expectancy task
+        else:
+            # Fallback to standard features if model doesn't have feature_names
             features = [
                 "Status_binary", "Adult Mortality", "Alcohol", "percentage expenditure",
                 "Hepatitis B", "Measles ", " BMI ", "under-five deaths ", "Polio",
@@ -127,17 +112,14 @@ Examples:
                 " thinness  1-19 years", "Income composition of resources", "Schooling", 
                 "infant deaths", " thinness 5-9 years"
             ]
-        
-        if args.target is None:
             target = "Life expectancy "
-        else:
-            target = args.target
         
         if args.verbose:
             print(f"Loading data from: {args.data_path}")
-            print(f"Using features: {features}")
+            print(f"Using features from model: {features}")
             print(f"Using target: {target}")
         
+        # Load and preprocess data using the same features the model was trained on
         X, y = load_data(args.data_path, features=features, target=target, scale=True)
         
         if args.verbose:
@@ -170,7 +152,7 @@ Examples:
         print(f"\n✅ Evaluation completed successfully!")
         
     except Exception as e:
-        print(f" Error: {str(e)}", file=sys.stderr)
+        print(f"❌ Error: {str(e)}", file=sys.stderr)
         sys.exit(1)
 
 

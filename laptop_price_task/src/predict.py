@@ -88,14 +88,6 @@ Examples:
     --data_path data/Laptop Price(1).csv \\
     --metrics_output_path results/evaluation_metrics.txt \\
     --predictions_output_path results/evaluation_predictions.csv
-
-  # Evaluate with verbose output
-  python src/predict.py \\
-    --model_path models/model1/lasso_model1.pkl \\
-    --data_path data/Laptop Price(1).csv \\
-    --metrics_output_path results/custom_metrics.txt \\
-    --predictions_output_path results/custom_predictions.csv \\
-    --verbose
         """
     )
     

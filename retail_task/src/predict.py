@@ -88,15 +88,6 @@ Examples:
     --data_path data/Retail.csv \\
     --metrics_output_path results/evaluation_metrics.txt \\
     --predictions_output_path results/evaluation_predictions.csv
-
-  # Evaluate with custom target variable
-  python src/predict.py \\
-    --model_path models/model1/lasso_model1.pkl \\
-    --data_path data/Retail.csv \\
-    --target "total_sales" \\
-    --metrics_output_path results/custom_metrics.txt \\
-    --predictions_output_path results/custom_predictions.csv \\
-    --verbose
         """
     )
     
@@ -111,8 +102,6 @@ Examples:
                        help='Path where predictions will be saved')
     
     # Optional arguments
-    parser.add_argument('--target', type=str, default='total_sales',
-                       help='Target column name (default: total_sales)')
     parser.add_argument('--verbose', action='store_true',
                        help='Print detailed information during execution')
     
@@ -124,6 +113,10 @@ Examples:
             print(f"Loading model from: {args.model_path}")
         model = load_model(args.model_path)
         
+        # Get the target variable that the model was trained on
+        # For retail task, we need to determine the target from the model or use a default
+        target = "total_sales"  # Default target for retail task
+        
         # Load and preprocess data using RetailModel
         if args.verbose:
             print(f"Loading and preprocessing data from: {args.data_path}")
@@ -134,17 +127,17 @@ Examples:
         retail_model.preprocess()
         
         # Check if target column exists
-        if args.target not in retail_model.df.columns:
-            available_cols = [col for col in retail_model.df.columns if col != args.target]
-            raise ValueError(f"Target column '{args.target}' not found. Available columns: {available_cols[:10]}...")
+        if target not in retail_model.df.columns:
+            available_cols = [col for col in retail_model.df.columns]
+            raise ValueError(f"Target column '{target}' not found. Available columns: {available_cols[:10]}...")
         
         # Extract features and target
-        X, y = retail_model.extract_x_y(args.target)
+        X, y = retail_model.extract_x_y(target)
         
         if args.verbose:
             print(f"Data shape: X={X.shape}, y={y.shape}")
-            print(f"Target variable: {args.target}")
-            print(f"Features: {[col for col in retail_model.df.columns if col != args.target][:10]}...")
+            print(f"Target variable: {target}")
+            print(f"Features: {[col for col in retail_model.df.columns if col != target][:10]}...")
         
         # Generate predictions
         if args.verbose:
