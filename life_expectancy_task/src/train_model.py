@@ -122,7 +122,7 @@ if __name__ == "__main__":
         "Status_binary", "Adult Mortality", "Alcohol", "percentage expenditure",
         "Hepatitis B", "Measles ", " BMI ", "under-five deaths ", "Polio",
         "Total expenditure", "Diphtheria ", " HIV/AIDS", "GDP", "Population",
-        " thinness  1-19 years", "Income composition of resources", "Schooling"
+        " thinness  1-19 years", "Income composition of resources", "Schooling", "infant deaths", " thinness 5-9 years"
     ]
     # features = ["Health_Index", "Disease_Index", "Economic_Index"]
     X, y = load_data(
@@ -146,7 +146,7 @@ if __name__ == "__main__":
         regularization=None, feature_names=features
     )
     model1.fit(X_train, y_train)
-    save_model(model1, "models/final_model/ols_model.pkl")
+    save_model(model1, "models/model3/ols_model3.pkl")
 
     # Model 2: Ridge Regression (L2)
     model2 = RegressionModel(
@@ -154,8 +154,8 @@ if __name__ == "__main__":
         regularization="ridge", lam=0.1, feature_names=features
     )
     model2.fit(X_train, y_train)
-    save_model(model2, "models/final_model/ridge_model.pkl")
-    save_weights_csv(model2, "results/final_model/ridge_weights.csv")
+    save_model(model2, "models/model3/ridge_model3.pkl")
+    save_weights_csv(model2, "results/model3/ridge_weights3.csv")
 
     # Model 3: Lasso Regression (L1)
     model3 = RegressionModel(
@@ -163,8 +163,8 @@ if __name__ == "__main__":
         regularization="lasso", lam=0.01, feature_names=features
     )
     model3.fit(X_train, y_train)
-    save_model(model3, "models/final_model/lasso_model.pkl")
-    save_weights_csv(model3, "results/final_model/lasso_weights.csv")
+    save_model(model3, "models/model3/lasso_model.pkl")
+    save_weights_csv(model3, "results/model3/lasso_weights.csv")
 
     # Predictions
    # -----------------------------
