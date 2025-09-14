@@ -10,7 +10,7 @@ class BaseModel:
     folder_name = None
 
     def __init__(self):
-        self.df: pd.DataFrame|None = None
+        self.df: pd.DataFrame = None
         self.read_csv()
 
     @staticmethod
@@ -19,10 +19,24 @@ class BaseModel:
         p = Path(os.path.dirname(full_path))
         return p.parent / folder_name / "data" / name
 
+    def one_hot_encode(self, col, prefix=None):
+        if prefix is None: prefix = col
+        oh = pd.get_dummies(self.df[col], prefix=prefix, drop_first=True, dtype="uint8")
+        self.df = self.df.drop(columns=[col]).join(oh)
+
+    def double_encode(self, col):
+        self.df[col] = self.df[col].astype(str).str.strip().str.lower().map({'yes': 1, 'no': 0}).astype('Int64')
 
     def read_csv(self):
         p = self._get_path(self.folder_name)
-        self.df = pd.read_csv(p)
+
+        if not (p.parent / 'df.pkl').exists():
+            self.df = pd.read_csv(p)
+            with open(p.parent / 'df.pkl', 'wb') as f:
+                pickle.dump(self.df, f)
+
+        with open(p.parent / 'df.pkl', 'rb') as f:
+            self.df = pickle.load(f)
 
     def preprocess(self):
         pass
@@ -119,6 +133,7 @@ class RegressionModel:
         clip = 1e3
 
         for _ in range(self.epochs):
+            print(_, "epochs done")
             y_pred = Xb @ self.weights
             error = y_pred - y
             grad = (Xb.T @ error) / n  # MSE gradient
@@ -196,14 +211,14 @@ class TrainModels:
         result_p.mkdir(parents=True, exist_ok=True)
 
         model1 = RegressionModel(
-            learning_rate=0.001, epochs=5000,
+            learning_rate=0.001, epochs=750,
             regularization=None, feature_names=cols
         )
         model1.fit(X_train, y_train)
         model1.save_model(model_p / "ols_model.pkl")
 
         model2 = RegressionModel(
-            learning_rate=0.001, epochs=5000,
+            learning_rate=0.001, epochs=750,
             regularization="ridge", lam=0.1, feature_names=cols
         )
         model2.fit(X_train, y_train)
@@ -211,7 +226,7 @@ class TrainModels:
         model2.save_weights_csv(result_p / "ridge_weights.csv")
 
         model3 = RegressionModel(
-            learning_rate=0.0005, epochs=5000,
+            learning_rate=0.001, epochs=750,
             regularization="lasso", lam=0.01, feature_names=cols
         )
         model3.fit(X_train, y_train)

@@ -22,13 +22,13 @@ class LaptopModel(BaseModel):
         element = element.replace('-', ' ')
         element = " ".join(element.split(" ")[0:-1])
         final = self.scores.get(element, None)
-        # if final is None:
-        #     keys = self.scores.keys()
-        #     main_series = " ".join(element.split(" ")[:-1])
-        #     for key in keys:
-        #         if main_series in key:
-        #             final = self.scores[key]
-        #             break
+        if final is None:
+            keys = self.scores.keys()
+            main_series = " ".join(element.split(" ")[:-1])
+            for key in keys:
+                if main_series in key:
+                    final = self.scores[key]
+                    break
         return final
 
     @staticmethod
