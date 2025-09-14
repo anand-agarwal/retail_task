@@ -1,0 +1,36 @@
+OLS Regression Metrics (Train):
+MSE: 0.19
+RMSE: 0.43
+R²: 0.82
+
+OLS Regression Metrics (Test):
+MSE: 0.12
+RMSE: 0.34
+R²: 0.86
+
+==================================================
+
+Ridge Regression Metrics (Train):
+MSE: 0.19
+RMSE: 0.43
+R²: 0.82
+
+Ridge Regression Metrics (Test):
+MSE: 0.12
+RMSE: 0.34
+R²: 0.86
+
+==================================================
+
+Lasso Regression Metrics (Train):
+MSE: 0.19
+RMSE: 0.44
+R²: 0.82
+
+Lasso Regression Metrics (Test):
+MSE: 0.12
+RMSE: 0.35
+R²: 0.85
+
+==================================================
+

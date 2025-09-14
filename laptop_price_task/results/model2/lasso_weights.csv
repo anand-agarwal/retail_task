@@ -1,0 +1,29 @@
+Feature,Weight
+bias,0.009011685911767594
+Inches,0.0
+Cpu,0.0
+Ram,0.296054771675469
+Weight,0.0
+touch,0.0
+px_width,0.00933219223598347
+px_height,0.016626739269520796
+ips_panel,0.0
+4k,0.0
+hd,0.0
+SSD,0.14380437739349544
+HDD,-0.0
+FLASH,0.0
+gpu_entry,0.0
+OpSys_Chrome OS,-0.0
+OpSys_Linux,-0.0
+OpSys_Mac OS X,0.0
+OpSys_No OS,-0.0
+OpSys_Windows 10,0.0
+OpSys_Windows 10 S,0.0
+OpSys_Windows 7,0.0
+OpSys_macOS,0.0
+Type_Gaming,0.0
+Type_Netbook,-0.0
+Type_Notebook,-0.046008199331545575
+Type_Ultrabook,0.0
+Type_Workstation,0.0
