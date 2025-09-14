@@ -1,0 +1,12 @@
+OLS Regression Metrics (Train):
+MSE: 20151.05
+RMSE: 141.95
+R²: -0.01
+
+OLS Regression Metrics (Test):
+MSE: 20219.81
+RMSE: 142.20
+R²: -0.01
+
+==================================================
+

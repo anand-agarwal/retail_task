@@ -221,9 +221,9 @@ class TrainModels:
             learning_rate=0.001, epochs=3000,
             regularization="ridge", lam=0.1, feature_names=cols
         )
-        # model2.fit(X_train, y_train)
-        # model2.save_model(model_p / "ridge_model.pkl")
-        # model2.save_weights_csv(result_p / "ridge_weights.csv")
+        model2.fit(X_train, y_train)
+        model2.save_model(model_p / "ridge_model.pkl")
+        model2.save_weights_csv(result_p / "ridge_weights.csv")
 
         model3 = RegressionModel(
             learning_rate=0.001, epochs=3000,

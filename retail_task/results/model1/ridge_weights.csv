@@ -1,0 +1,61 @@
+Feature,Weight
+bias,242.2438146973441
+age,0.0207741217069702
+loyalty_program,-0.256994768177595
+membership_years,-0.19875173537748653
+churned,0.014818967972543754
+number_of_children,-0.20831263442442452
+quantity,0.25031389473981125
+unit_price,-0.12665570993553604
+discount_applied,-0.14258337912752309
+month_of_year,-0.23817588911183893
+avg_discount_used,-0.24061150631804923
+online_purchases,-0.41115021555910714
+in_store_purchases,0.30641953348579015
+avg_items_per_transaction,-0.0028254790687392765
+avg_transaction_value,0.0725306986809373
+total_returned_items,0.19264837563864542
+total_returned_value,-0.10319536224846308
+total_sales,-0.0294141522225228
+total_transactions,-0.3021054811091271
+total_items_purchased,0.05211640543082367
+total_discounts_received,-0.14148153211004058
+avg_spent_per_category,-0.019713050213103656
+max_single_purchase_value,0.10010588887553463
+min_single_purchase_value,-0.2534219211793741
+distance_to_store,-0.279009490716045
+holiday_season,0.16935089208020696
+weekend,-0.11595263930965617
+customer_support_calls,-0.387869119020555
+email_subscriptions,0.11052694954510116
+website_visits,0.20095668347294313
+days_since_last_purchase,0.13337701310584088
+gender_Male,0.23489314359936797
+gender_Other,-0.10055669602168027
+income_bracket_Low,0.037511434291877886
+income_bracket_Medium,0.15710040558233004
+marital_status_Married,0.0684059611868734
+marital_status_Single,0.07002905673303506
+education_level_High School,-0.00823407954807332
+education_level_Master's,0.01911653038768158
+education_level_PhD,0.13365864081760875
+occupation_Retired,0.05496889950374673
+occupation_Self-Employed,0.05628151516414653
+occupation_Unemployed,0.0168089824771427
+payment_method_Credit Card,-0.27075048865320306
+payment_method_Debit Card,-0.30647375653986003
+payment_method_Mobile Payment,-0.04911308260113903
+store_location_Location B,0.003644727341187303
+store_location_Location C,-0.007581106855762263
+store_location_Location D,-0.030353700421509006
+purchase_frequency_Monthly,0.21240871746599688
+purchase_frequency_Weekly,0.06097912446381893
+purchase_frequency_Yearly,-0.17671674572555507
+customer_state_State Y,0.08221634808824414
+customer_state_State Z,-0.21748691924236746
+store_state_State Y,0.0939880801576298
+store_state_State Z,-0.1842564025013804
+app_usage_Low,0.18084735438546704
+app_usage_Medium,0.08941669438212334
+social_media_engagement_Low,-0.13024713552899966
+social_media_engagement_Medium,-0.07157303995962426
