@@ -6,8 +6,8 @@ CLI for evaluating saved models using existing functions from train_model.py.
 
 Usage:
     python src/predict.py \
-      --model_path models/regression_model_final.pkl \
-      --data_path data/train_data.csv \
+      --model_path models/final_model/ridge_model.pkl \
+      --data_path "/Users/anandagarwal/retail_task/life_expectancy_task/data/Life Expectancy.csv" \
       --metrics_output_path results/train_metrics.txt \
       --predictions_output_path results/train_predictions.csv
 """
@@ -94,43 +94,10 @@ Examples:
     args = parser.parse_args()
     
     try:
-        # Load model
-        if args.verbose:
-            print(f"Loading model from: {args.model_path}")
         model = load_model(args.model_path)
-        
-        # Get the features that the model was trained on
-        if hasattr(model, 'feature_names') and model.feature_names is not None:
-            features = model.feature_names
-            target = "Life expectancy "  # Standard target for life expectancy task
-        else:
-            # Fallback to standard features if model doesn't have feature_names
-            features = [
-                "Status_binary", "Adult Mortality", "Alcohol", "percentage expenditure",
-                "Hepatitis B", "Measles ", " BMI ", "under-five deaths ", "Polio",
-                "Total expenditure", "Diphtheria ", " HIV/AIDS", "GDP", "Population",
-                " thinness  1-19 years", "Income composition of resources", "Schooling", 
-                "infant deaths", " thinness 5-9 years"
-            ]
-            target = "Life expectancy "
-        
-        if args.verbose:
-            print(f"Loading data from: {args.data_path}")
-            print(f"Using features from model: {features}")
-            print(f"Using target: {target}")
-        
-        # Load and preprocess data using the same features the model was trained on
-        X, y = load_data(args.data_path, features=features, target=target, scale=True)
-        
-        if args.verbose:
-            print(f"Data shape: X={X.shape}, y={y.shape}")
-        
-        # Generate predictions
-        if args.verbose:
-            print("Generating predictions...")
+        X, y = load_data(args.data_path, features=model.feature_names, target="Life expectancy ", scale=True)
         y_pred = model.predict(X)
         
-        # Calculate metrics
         metrics = {
             'mse': mse(y, y_pred),
             'rmse': rmse(y, y_pred),
@@ -138,21 +105,16 @@ Examples:
             'mae': mae(y, y_pred)
         }
         
-        # Print metrics to console
         print_metrics(metrics)
-        
-        # Save metrics
         save_metrics(metrics, args.metrics_output_path)
-        print(f"✅ Metrics saved to: {args.metrics_output_path}")
-        
-        # Save predictions
         save_predictions(y, y_pred, args.predictions_output_path)
-        print(f"✅ Predictions saved to: {args.predictions_output_path}")
+        print(f"Evaluation completed successfully!")
         
-        print(f"\n✅ Evaluation completed successfully!")
-        
+    except FileNotFoundError:
+        print("Model not found", file=sys.stderr)
+        sys.exit(1)
     except Exception as e:
-        print(f"❌ Error: {str(e)}", file=sys.stderr)
+        print(f"Error: {str(e)}", file=sys.stderr)
         sys.exit(1)
 
 

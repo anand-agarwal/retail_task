@@ -108,43 +108,15 @@ Examples:
     args = parser.parse_args()
     
     try:
-        # Load model
-        if args.verbose:
-            print(f"Loading model from: {args.model_path}")
         model = load_model(args.model_path)
         
-        # Get the target variable that the model was trained on
-        # For retail task, we need to determine the target from the model or use a default
-        target = "total_sales"  # Default target for retail task
-        
-        # Load and preprocess data using RetailModel
-        if args.verbose:
-            print(f"Loading and preprocessing data from: {args.data_path}")
-        
-        # Create RetailModel instance and preprocess data
         retail_model = RetailModel()
         retail_model.df = pd.read_csv(args.data_path)
         retail_model.preprocess()
+        X, y = retail_model.extract_x_y("total_sales")
         
-        # Check if target column exists
-        if target not in retail_model.df.columns:
-            available_cols = [col for col in retail_model.df.columns]
-            raise ValueError(f"Target column '{target}' not found. Available columns: {available_cols[:10]}...")
-        
-        # Extract features and target
-        X, y = retail_model.extract_x_y(target)
-        
-        if args.verbose:
-            print(f"Data shape: X={X.shape}, y={y.shape}")
-            print(f"Target variable: {target}")
-            print(f"Features: {[col for col in retail_model.df.columns if col != target][:10]}...")
-        
-        # Generate predictions
-        if args.verbose:
-            print("Generating predictions...")
         y_pred = model.predict(X)
         
-        # Calculate metrics
         metrics = {
             'mse': mse(y, y_pred),
             'rmse': rmse(y, y_pred),
@@ -152,21 +124,16 @@ Examples:
             'mae': mae(y, y_pred)
         }
         
-        # Print metrics to console
         print_metrics(metrics)
-        
-        # Save metrics
         save_metrics(metrics, args.metrics_output_path)
-        print(f"✅ Metrics saved to: {args.metrics_output_path}")
-        
-        # Save predictions
         save_predictions(y, y_pred, args.predictions_output_path)
-        print(f"✅ Predictions saved to: {args.predictions_output_path}")
+        print(f"Evaluation completed successfully!")
         
-        print(f"\n✅ Evaluation completed successfully!")
-        
+    except FileNotFoundError:
+        print(" Model not found", file=sys.stderr)
+        sys.exit(1)
     except Exception as e:
-        print(f"❌ Error: {str(e)}", file=sys.stderr)
+        print(f" Error: {str(e)}", file=sys.stderr)
         sys.exit(1)
 
 
