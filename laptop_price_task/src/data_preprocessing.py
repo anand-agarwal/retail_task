@@ -63,11 +63,13 @@ class LaptopModel(BaseModel):
         self.df[['SSD', 'HDD', 'FLASH']] = self.df['Memory'].apply(self.parse_storage_gb_exact).astype('float32')
         self.df['Cpu'] = self.df['Cpu'].apply(self._handle_cpu)
         self.df['Weight'] = self.df['Weight'].str.replace('kg', '').astype('float32')
-        # oh = pd.get_dummies(self.df["OpSys"], prefix="OpSys", drop_first=True, dtype="uint8")
-        # self.df = self.df.drop(columns=["OpSys"]).join(oh)
-        self.df = self.df.drop(columns=["OpSys"])
+        oh = pd.get_dummies(self.df["OpSys"], prefix="OpSys", drop_first=True, dtype="uint8")
+        convertible = pd.get_dummies(self.df['TypeName'], prefix="Type", drop_first=True, dtype="uint8")
+        self.df['gpu_entry'] = self.df['Gpu'].str.contains(r"(Nvidia)|(AMD Radeon rx)", regex=True, case=False).astype('uint8')
+        self.df = self.df.drop(columns=["OpSys"]).join(oh)
+        self.df = self.df.drop(columns=["TypeName"]).join(convertible)
         self.df = self.df.drop(columns=["Memory", "ScreenResolution",
-                                        "TypeName", "Company", "Gpu"])
+                                        "Company", "Gpu"])
         self.df = self.df.dropna()
         self.standardize()
 

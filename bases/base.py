@@ -27,13 +27,26 @@ class BaseModel:
     def preprocess(self):
         pass
 
-    def standardize(self):
-        num_cols = self.df.select_dtypes(include=[np.number]).columns
+    def standardize(self, target=None):
 
-        mu = self.df[num_cols].mean()
-        sig = self.df[num_cols].std(ddof=0).replace(0, 1.0)
+        df = self.df.copy()
+        num = df.select_dtypes(include=[np.number]).columns
 
-        self.df[num_cols] = (self.df[num_cols] - mu) / sig
+        # drop target if numeric
+        if target is not None and target in num:
+            num = num.drop(target)
+
+        # detect 0/1 columns (one-hots)
+        is_ohe = df[num].apply(lambda s: s.dropna().isin([0, 1]).all())
+        ohe_cols = is_ohe[is_ohe].index
+
+        cont = num.difference(ohe_cols)  # continuous columns to scale
+
+        mu = df[cont].mean()
+        sig = df[cont].std(ddof=0).replace(0, 1.0)
+
+        df[cont] = (df[cont] - mu) / sig
+        self.df = df
 
     def remove_nan(self):
         pass
@@ -198,7 +211,7 @@ class TrainModels:
         model2.save_weights_csv(result_p / "ridge_weights.csv")
 
         model3 = RegressionModel(
-            learning_rate=0.001, epochs=5000,
+            learning_rate=0.0005, epochs=5000,
             regularization="lasso", lam=0.01, feature_names=cols
         )
         model3.fit(X_train, y_train)
