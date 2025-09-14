@@ -1,10 +1,10 @@
 Lasso Regression Metrics (Train):
-MSE: 19992.53
-RMSE: 141.39
-R²: 0.00
+MSE: 19993.38
+RMSE: 141.40
+R²: -0.00
 
 Lasso Regression Metrics (Test):
-MSE: 20066.91
+MSE: 20068.29
 RMSE: 141.66
 R²: -0.00
 

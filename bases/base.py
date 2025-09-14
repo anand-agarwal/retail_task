@@ -227,7 +227,7 @@ class TrainModels:
 
         model3 = RegressionModel(
             learning_rate=0.001, epochs=5000,
-            regularization="lasso", lam=0.01, feature_names=cols
+            regularization="lasso", lam=0.1, feature_names=cols,
         )
         model3.fit(X_train, y_train)
         model3.save_model(model_p / "lasso_model.pkl")

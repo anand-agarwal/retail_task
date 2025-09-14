@@ -1,8 +1,61 @@
 Feature,Weight
-bias,254.9047995614828
-avg_discount_used,-0.2658970517257818
+bias,253.20299389096877
+age,0.013820584292625851
+loyalty_program,-0.28162149531909664
+membership_years,-0.21588574762321924
+churned,0.006754992550735109
+number_of_children,-0.22593953666559774
+quantity,0.27368966960792535
+unit_price,-0.13355416237652082
+discount_applied,-0.15176614272462455
+month_of_year,-0.25979521841527636
+avg_discount_used,-0.26288288985009617
+online_purchases,-0.45636530158663025
+in_store_purchases,0.33774656549547255
 avg_items_per_transaction,-0.0
-avg_transaction_value,0.07390454533882118
-purchase_frequency_Monthly,0.2368482815905097
-purchase_frequency_Weekly,0.07194018711094699
-purchase_frequency_Yearly,-0.16991609066631108
+avg_transaction_value,0.07212247159549746
+total_returned_items,0.20889468830887856
+total_returned_value,-0.10664215864426992
+total_sales,-0.023650042891989454
+total_transactions,-0.3330587399359035
+total_items_purchased,0.049248142291514
+total_discounts_received,-0.1510511462720284
+avg_spent_per_category,-0.012484156408762307
+max_single_purchase_value,0.10329787993597658
+min_single_purchase_value,-0.27731959584260873
+distance_to_store,-0.3069046384591275
+holiday_season,0.18204131724444184
+weekend,-0.12192438181861312
+customer_support_calls,-0.43045210804962136
+email_subscriptions,0.11568495479649
+website_visits,0.21799857062146077
+days_since_last_purchase,0.14171638867578262
+gender_Male,0.2623794680352028
+gender_Other,-0.08491505776334891
+income_bracket_Low,0.04556662016506531
+income_bracket_Medium,0.17446817609479917
+marital_status_Married,0.07223517108162832
+marital_status_Single,0.07393813750893247
+education_level_High School,0.0
+education_level_Master's,0.023140572780795586
+education_level_PhD,0.14748234082764336
+occupation_Retired,0.052293704507487354
+occupation_Self-Employed,0.053613444537940355
+occupation_Unemployed,0.01051838021910097
+payment_method_Credit Card,-0.34839152651968014
+payment_method_Debit Card,-0.3871944533189795
+payment_method_Mobile Payment,-0.10770836597575992
+store_location_Location B,0.0
+store_location_Location C,-0.0
+store_location_Location D,-0.024312949241050954
+purchase_frequency_Monthly,0.22979162856663102
+purchase_frequency_Weekly,0.06486752241169645
+purchase_frequency_Yearly,-0.1791589277671651
+customer_state_State Y,0.0653206310885945
+customer_state_State Z,-0.24348988942678235
+store_state_State Y,0.08357859250029645
+store_state_State Z,-0.20227225257482292
+app_usage_Low,0.20899963701341032
+app_usage_Medium,0.11067761502020558
+social_media_engagement_Low,-0.14651471341499533
+social_media_engagement_Medium,-0.083569729982394
