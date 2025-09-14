@@ -1,0 +1,61 @@
+Feature,Weight
+bias,242.24381469734425
+age,0.0
+loyalty_program,-0.09578984335319322
+membership_years,-0.12003412710122005
+churned,0.0
+number_of_children,-0.13208488859292772
+quantity,0.17729531440725485
+unit_price,-0.042498033572417326
+discount_applied,-0.05862764966366264
+month_of_year,-0.16293969318171858
+avg_discount_used,-0.16746781663257398
+online_purchases,-0.3513646264891118
+in_store_purchases,0.23773018910116295
+avg_items_per_transaction,-0.0
+avg_transaction_value,0.0
+total_returned_items,0.11375384172133728
+total_returned_value,-0.01737270068347905
+total_sales,-0.0
+total_transactions,-0.23275632706134355
+total_items_purchased,0.0
+total_discounts_received,-0.058028099151374406
+avg_spent_per_category,-0.0
+max_single_purchase_value,0.013628865733523586
+min_single_purchase_value,-0.1797573493114395
+distance_to_store,-0.2078026865802521
+holiday_season,0.04695425311737968
+weekend,-0.015171651356603122
+customer_support_calls,-0.3252315511508305
+email_subscriptions,0.012825909608329853
+website_visits,0.12257318530918677
+days_since_last_purchase,0.04869405525366739
+gender_Male,0.1026735336750102
+gender_Other,-0.010791057201401758
+income_bracket_Low,0.0
+income_bracket_Medium,0.03280730507729838
+marital_status_Married,0.0
+marital_status_Single,0.0
+education_level_High School,-0.0
+education_level_Master's,0.0
+education_level_PhD,0.02643818971185577
+occupation_Retired,0.0
+occupation_Self-Employed,0.0
+occupation_Unemployed,-0.0
+payment_method_Credit Card,-0.09360332737724592
+payment_method_Debit Card,-0.11320842102728457
+payment_method_Mobile Payment,-0.0
+store_location_Location B,0.0
+store_location_Location C,-0.0
+store_location_Location D,-0.0
+purchase_frequency_Monthly,0.06767073359773065
+purchase_frequency_Weekly,0.0
+purchase_frequency_Yearly,-0.06922907796591735
+customer_state_State Y,0.0014555819562757177
+customer_state_State Z,-0.09337623249934202
+store_state_State Y,0.01008302368835544
+store_state_State Z,-0.0716356737157042
+app_usage_Low,0.03538595176226483
+app_usage_Medium,0.0
+social_media_engagement_Low,-0.009350207929515774
+social_media_engagement_Medium,-0.0
