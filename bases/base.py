@@ -214,19 +214,19 @@ class TrainModels:
             learning_rate=0.001, epochs=750,
             regularization=None, feature_names=cols
         )
-        model1.fit(X_train, y_train)
-        model1.save_model(model_p / "ols_model.pkl")
+        # model1.fit(X_train, y_train)
+        # model1.save_model(model_p / "ols_model.pkl")
 
         model2 = RegressionModel(
             learning_rate=0.001, epochs=750,
             regularization="ridge", lam=0.1, feature_names=cols
         )
-        model2.fit(X_train, y_train)
-        model2.save_model(model_p / "ridge_model.pkl")
-        model2.save_weights_csv(result_p / "ridge_weights.csv")
+        # model2.fit(X_train, y_train)
+        # model2.save_model(model_p / "ridge_model.pkl")
+        # model2.save_weights_csv(result_p / "ridge_weights.csv")
 
         model3 = RegressionModel(
-            learning_rate=0.001, epochs=750,
+            learning_rate=0.001, epochs=5000,
             regularization="lasso", lam=0.01, feature_names=cols
         )
         model3.fit(X_train, y_train)
@@ -234,8 +234,8 @@ class TrainModels:
         model3.save_weights_csv(result_p / "lasso_weights.csv")
 
         models = {
-            "OLS": model1,
-            "Ridge": model2,
+            # "OLS": model1,
+            # "Ridge": model2,
             "Lasso": model3
         }
 
